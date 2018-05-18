@@ -8,3 +8,7 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
+
+.ReactFlipCard__Front, .ReactFlipCard__Back {
+  width: 300px;
+}

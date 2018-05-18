@@ -22,13 +22,18 @@ const UserForm = {
 
 const CardLayout = {
     marginTop: '50px',
-    // justifyContent: 'center',
-    maxWidth: '300px'
+    maxWidth: '300px',
+    marginBottom: '150px'
+}
+
+const CardContainer = {
+    width: '30%'
 }
 
 export const styles = {
     HomeFont,
     HomeContainer,
     UserForm,
-    CardLayout
+    CardLayout,
+    CardContainer
 }

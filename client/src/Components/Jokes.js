@@ -8,6 +8,7 @@ import {
   Col,
 } from 'reactstrap';
 import axios from 'axios';
+import FlipCard from 'react-flipcard-2'
 
 import { styles } from '../styles';
 
@@ -16,11 +17,30 @@ class Jokes extends Component {
     super(props);
     this.state = {
       jokes: [],
+      isFlipped: false
     };
   }
 
   componentDidMount() {
     this.getJokes();
+  }
+
+  showFront() {
+    this.setState({
+      isFlipped: false
+    });
+  }
+
+  handleOnFlip(flipped) {
+    if (flipped) {
+      this.refs.backButton.getDOMNode().focus();
+    }
+  }
+
+  handleKeyDown(e) {
+    if (this.state.isFlipped && e.keyCode === 27) {
+      this.showFront();
+    }
   }
 
   getJokes = () => {
@@ -49,12 +69,20 @@ class Jokes extends Component {
         <Container>
             <Row>
                 {this.state.jokes.map(jokes => {
-                return <div key={jokes.id}>
+                return <div key={jokes.id} style={styles.CardContainer}>
                     <Col style={styles.CardLayout} sm="12" md="4">
-                      <Card body>
-                        <CardTitle>{jokes.setup}</CardTitle>
-                        <CardText>{jokes.punchline}</CardText>
-                      </Card>
+                      <FlipCard>
+                        <div>
+                          <Card body>
+                            <CardTitle>{jokes.setup}</CardTitle>
+                          </Card>
+                        </div>
+                        <div>
+                          <Card body>
+                            <CardText>{jokes.punchline}</CardText>
+                          </Card>
+                        </div>
+                      </FlipCard>
                     </Col>
                   </div>;
                 })}
